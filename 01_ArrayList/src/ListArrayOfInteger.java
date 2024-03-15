@@ -55,7 +55,37 @@ public class ListArrayOfInteger{
     }
 
     public void remove(int index) {
-        
+        if(index >= count || index < 0) {
+            throw new IllegalArgumentException("Index inválido");
+        }
+
+        if(index == count - 1) {
+            diminuirArray();
+        }
+
+        if(index < count - 1) {
+            int[] aux = new int[data.length];
+
+            for(int i = 0; i < data.length; i++) {
+                aux[i] = data[i];
+            }
+
+            for(int i = index; i < data.length - 1; i++) {
+                aux[i] = data[i + 1];
+            }
+            data = aux;
+            diminuirArray();
+        }
+    }
+
+    public void diminuirArray() {
+        int[] aux = new int[data.length - 1];
+
+            for(int i = 0; i < aux.length; i++) {
+                aux[i] = data[i];
+            }
+
+            data = aux;
     }
 
     public int get(int index) {
@@ -71,13 +101,21 @@ public class ListArrayOfInteger{
         data = aux;
     }
 
-    // public boolean contains() {
+    public boolean contains(int j) {
+        for(int i = 0; i < data.length; i++) {
+            if (data[i] ==  j) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    // }
-
-    // public boolean isEmpty() {
-
-    // }
+    public boolean isEmpty() {
+        if (count != 0) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public String toString() {

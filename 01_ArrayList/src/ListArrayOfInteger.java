@@ -17,7 +17,7 @@ public class ListArrayOfInteger{
         count = 0;
     }
 
-    public void expandirArray() {
+    private void expandirArray() {
         int[] aux = new int[data.length + 1];
 
         for(int i = 0; i < data.length; i++) {
@@ -26,7 +26,7 @@ public class ListArrayOfInteger{
         data = aux;
     }
 
-    public void diminuirArray() {
+    private void diminuirArray() {
         int[] aux = new int[data.length - 1];
 
         for(int i = 0; i < aux.length; i++) {

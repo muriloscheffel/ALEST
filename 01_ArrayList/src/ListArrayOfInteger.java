@@ -10,19 +10,40 @@ public class ListArrayOfInteger{
     }
 
     public ListArrayOfInteger(int size){
+        if(size < 1) {
+            throw new IllegalArgumentException("Tamanho inválido");
+        }
         data = new int[size];
         count = 0;
     }
 
+    public void expandirArray() {
+        int[] aux = new int[data.length + 1];
+
+        for(int i = 0; i < data.length; i++) {
+            aux[i] = data[i];
+        }
+        data = aux;
+    }
+
+    public void diminuirArray() {
+        int[] aux = new int[data.length - 1];
+
+        for(int i = 0; i < aux.length; i++) {
+            aux[i] = data[i];
+        }
+        data = aux;
+    }
+
     public void add(int index, int i) {
-        if(index > count) {
+        if(index > count || index < 0) {
             throw new IllegalArgumentException("Index inválido");
         }
 
         int[] aux = new int[data.length + 1];
 
         for(int j = 0; j < aux.length; j++) {
-            if (j == index) {
+            if(j == index) {
                aux[index] = i; 
             } else {
                 if(j > index) {
@@ -38,20 +59,11 @@ public class ListArrayOfInteger{
     }
 
     public void add(int i) {
-        if(count == data.length) {
-            expandirArray(data.length + 1);
+        if(count >= data.length) {
+            expandirArray();
         }
         data[count] = i;
         count++;
-    }
-
-    public void expandirArray(int tam) {
-        int[] aux = new int[tam];
-
-        for(int j = 0; j < data.length; j++) {
-            aux[j] = data[j];
-        }
-        data = aux;
     }
 
     public void remove(int index) {
@@ -61,6 +73,7 @@ public class ListArrayOfInteger{
 
         if(index == count - 1) {
             diminuirArray();
+            count--;
         }
 
         if(index < count - 1) {
@@ -75,20 +88,14 @@ public class ListArrayOfInteger{
             }
             data = aux;
             diminuirArray();
+            count--;
         }
     }
 
-    public void diminuirArray() {
-        int[] aux = new int[data.length - 1];
-
-            for(int i = 0; i < aux.length; i++) {
-                aux[i] = data[i];
-            }
-
-            data = aux;
-    }
-
     public int get(int index) {
+        if(index > count || index < 0) {
+            throw new IllegalArgumentException("Index inválido");
+        }
         return data[index];
     }
 
@@ -103,7 +110,7 @@ public class ListArrayOfInteger{
 
     public boolean contains(int j) {
         for(int i = 0; i < data.length; i++) {
-            if (data[i] ==  j) {
+            if(data[i] ==  j) {
                 return true;
             }
         }
@@ -111,10 +118,26 @@ public class ListArrayOfInteger{
     }
 
     public boolean isEmpty() {
-        if (count != 0) {
+        if(count != 0) {
             return false;
         }
         return true;
+    }
+
+    public int indexOf(int j) {
+        for(int i = 0; i < data.length; i++) {
+            if(data[i] == j) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void set(int index, int j) {
+        if(index > count || index < 0) {
+            throw new IllegalArgumentException("Index inválido");
+        }
+        data[index] = j;
     }
 
     @Override

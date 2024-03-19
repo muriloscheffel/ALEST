@@ -1,11 +1,12 @@
 import java.util.*;
 
 public class ListArrayOfInteger{
-    private int[] data;
+    private static final int INITIAL_SIZE = 1;
+    private Integer[] data;
     private int count;
 
     public ListArrayOfInteger(){
-        data = new int[1];
+        data = new Integer[INITIAL_SIZE];
         count = 0;
     }
 
@@ -13,12 +14,12 @@ public class ListArrayOfInteger{
         if(size < 1) {
             throw new IllegalArgumentException("Tamanho inválido");
         }
-        data = new int[size];
+        data = new Integer[size];
         count = 0;
     }
 
     private void expandirArray() {
-        int[] aux = new int[data.length + 1];
+        Integer[] aux = new Integer[data.length + 1];
 
         for(int i = 0; i < data.length; i++) {
             aux[i] = data[i];
@@ -27,7 +28,7 @@ public class ListArrayOfInteger{
     }
 
     private void diminuirArray() {
-        int[] aux = new int[data.length - 1];
+        Integer[] aux = new Integer[data.length - 1];
 
         for(int i = 0; i < aux.length; i++) {
             aux[i] = data[i];
@@ -35,16 +36,16 @@ public class ListArrayOfInteger{
         data = aux;
     }
 
-    public void add(int index, int i) {
+    public void add(int index, Integer element) {
         if(index > count || index < 0) {
             throw new IllegalArgumentException("Index inválido");
         }
 
-        int[] aux = new int[data.length + 1];
+        Integer[] aux = new Integer[data.length + 1];
 
         for(int j = 0; j < aux.length; j++) {
             if(j == index) {
-               aux[index] = i; 
+                aux[index] = element;
             } else {
                 if(j > index) {
                     aux[j] = data[j - 1];
@@ -58,11 +59,11 @@ public class ListArrayOfInteger{
         count++;
     }
 
-    public void add(int i) {
+    public void add(Integer element) {
         if(count >= data.length) {
             expandirArray();
         }
-        data[count] = i;
+        data[count] = element;
         count++;
     }
 
@@ -77,7 +78,7 @@ public class ListArrayOfInteger{
         }
 
         if(index < count - 1) {
-            int[] aux = new int[data.length];
+            Integer[] aux = new Integer[data.length];
 
             for(int i = 0; i < data.length; i++) {
                 aux[i] = data[i];
@@ -86,10 +87,20 @@ public class ListArrayOfInteger{
             for(int i = index; i < data.length - 1; i++) {
                 aux[i] = data[i + 1];
             }
+
             data = aux;
             diminuirArray();
             count--;
         }
+    }
+
+    public boolean remove(Integer element) {
+        for(int i = 0; i < data.length; i++) {
+            if(element.equals(data[i])) {
+                
+            }
+        }
+        return false;
     }
 
     public int get(int index) {
@@ -104,13 +115,14 @@ public class ListArrayOfInteger{
     }
 
     public void clear() {
-        int[] aux = new int[0];
+        Integer[] aux = new Integer[INITIAL_SIZE];
         data = aux;
+        count = 0;
     }
 
-    public boolean contains(int j) {
+    public boolean contains(Integer element) {
         for(int i = 0; i < data.length; i++) {
-            if(data[i] ==  j) {
+            if(data[i].equals(element)) {
                 return true;
             }
         }
@@ -124,20 +136,20 @@ public class ListArrayOfInteger{
         return true;
     }
 
-    public int indexOf(int j) {
+    public int indexOf(Integer element) {
         for(int i = 0; i < data.length; i++) {
-            if(data[i] == j) {
+            if(data[i].equals(element)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public void set(int index, int j) {
+    public void set(int index, Integer element) {
         if(index > count || index < 0) {
             throw new IllegalArgumentException("Index inválido");
         }
-        data[index] = j;
+        data[index] = element;
     }
 
     @Override

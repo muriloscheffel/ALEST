@@ -38,7 +38,7 @@ public class ListArrayOfInteger{
 
     public void add(int index, Integer element) {
         if(index > count || index < 0) {
-            throw new IllegalArgumentException("Index inválido");
+            throw new IndexOutOfBoundsException("Index inválido");
         }
 
         Integer[] aux = new Integer[data.length + 1];
@@ -67,10 +67,12 @@ public class ListArrayOfInteger{
         count++;
     }
 
-    public void remove(int index) {
+    public Integer removeByIndex(int index) {
         if(index >= count || index < 0) {
-            throw new IllegalArgumentException("Index inválido");
+            throw new IndexOutOfBoundsException("Index inválido");
         }
+
+        Integer element = data[index];
 
         if(index == count - 1) {
             diminuirArray();
@@ -78,26 +80,26 @@ public class ListArrayOfInteger{
         }
 
         if(index < count - 1) {
-            Integer[] aux = new Integer[data.length];
-
-            for(int i = 0; i < data.length; i++) {
-                aux[i] = data[i];
-            }
-
             for(int i = index; i < data.length - 1; i++) {
-                aux[i] = data[i + 1];
+                data[i] = data[i + 1];
             }
 
-            data = aux;
             diminuirArray();
             count--;
         }
+        return element;
     }
 
     public boolean remove(Integer element) {
         for(int i = 0; i < data.length; i++) {
             if(element.equals(data[i])) {
-                
+                for(int j = i; j < count - 1; j++) {
+                    data[j] = data[j + 1];
+                }
+                data[count - 1] = null;
+                diminuirArray();
+                count--;
+                return true;
             }
         }
         return false;
@@ -105,7 +107,7 @@ public class ListArrayOfInteger{
 
     public int get(int index) {
         if(index > count || index < 0) {
-            throw new IllegalArgumentException("Index inválido");
+            throw new IndexOutOfBoundsException("Index inválido");
         }
         return data[index];
     }
@@ -147,7 +149,7 @@ public class ListArrayOfInteger{
 
     public void set(int index, Integer element) {
         if(index > count || index < 0) {
-            throw new IllegalArgumentException("Index inválido");
+            throw new IndexOutOfBoundsException("Index inválido");
         }
         data[index] = element;
     }

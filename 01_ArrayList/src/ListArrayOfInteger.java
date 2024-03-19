@@ -128,6 +128,7 @@ public class ListArrayOfInteger{
                 return true;
             }
         }
+
         return false;
     }
 
@@ -152,6 +153,34 @@ public class ListArrayOfInteger{
             throw new IndexOutOfBoundsException("Index inválido");
         }
         data[index] = element;
+    }
+
+    public Integer[] toArray() {
+        Integer[] aux = new Integer[count];
+
+        for(int i = 0; i < count; i++) {
+            aux[i] = data[i];
+        }
+        return aux;
+    }
+
+    public void ensureCapacity(int minCapacity) {
+        if(minCapacity > data.length) {
+            Integer[] aux = new Integer[minCapacity];
+
+            for(int i = 0; i < count; i++) {
+                aux[i] = data[i];
+            }
+            data = aux;
+        }
+    }
+
+    public void iterator() {
+        int cont = 0;
+        for(Integer i : data) {
+            System.out.println("Index: " + cont + " Integer: " + i);
+            cont++;
+        }
     }
 
     @Override

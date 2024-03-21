@@ -41,22 +41,15 @@ public class ListArrayOfInteger{
             throw new IndexOutOfBoundsException("Index inválido");
         }
 
-        Integer[] aux = new Integer[data.length + 1];
-
-        for(int j = 0; j < aux.length; j++) {
-            if(j == index) {
-                aux[index] = element;
-            } else {
-                if(j > index) {
-                    aux[j] = data[j - 1];
-                }
-                else {
-                    aux[j] = data[j];
-                }
-            }
+        if(index == count) {
+            expandirArray();
+            data[index] = element;
+            count++;
         }
-        data = aux;
-        count++;
+
+        if(index < count) {
+
+        }
     }
 
     public void add(Integer element) {
@@ -132,6 +125,21 @@ public class ListArrayOfInteger{
         return false;
     }
 
+    public boolean containsRecursivo(Integer element) {
+        return containsRecursivoAux(element, 0);
+    }
+
+    private boolean containsRecursivoAux(Integer element, int i) {
+        if(i == count) {
+            return false;
+        }
+        if(data[i].equals(element)) {
+            return true;
+        }
+
+        return containsRecursivoAux(element, i + 1);
+    }
+
     public boolean isEmpty() {
         if(count != 0) {
             return false;
@@ -148,19 +156,13 @@ public class ListArrayOfInteger{
         return -1;
     }
 
-    public void set(int index, Integer element) {
+    public Integer set(int index, Integer element) {
         if(index > count || index < 0) {
             throw new IndexOutOfBoundsException("Index inválido");
         }
+
+        Integer aux = data[index];
         data[index] = element;
-    }
-
-    public Integer[] toArray() {
-        Integer[] aux = new Integer[count];
-
-        for(int i = 0; i < count; i++) {
-            aux[i] = data[i];
-        }
         return aux;
     }
 
@@ -181,6 +183,48 @@ public class ListArrayOfInteger{
             System.out.println("Index: " + cont + " Integer: " + i);
             cont++;
         }
+    }
+
+    public Integer[] subList(int fromIndex, int toIndex) {
+        if(fromIndex < 0 || toIndex > count) {
+            throw new IndexOutOfBoundsException("Index inválido");
+        }
+        if(fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Index inválido");
+        }
+
+        Integer[] aux = new Integer[toIndex - fromIndex];
+        int cont = 0;
+
+        for(int i = fromIndex; i < toIndex; i++) {
+            aux[cont] = data[i];
+            cont++;
+        }
+        return aux;
+    }
+
+    public void revese() {
+        Integer[] aux = new Integer[data.length];
+    }
+
+    public int countOccurrences(Integer element) {
+        int cont = 0;
+
+        for(int i = 0; i < data.length; i++) {
+            if(data[i].equals(element)) {
+                cont ++;
+            }
+        }
+
+        return cont;
+    }
+
+    public void addIncreasingOrder(Integer element) {
+
+    }
+
+    public void unique() {
+
     }
 
     @Override

@@ -144,6 +144,11 @@ public class LinkedListOfInteger {
         if(index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException("Index invalido");
         }
+        Node aux = head;
+
+        for(int i = 0; i < index; i++) {
+
+        }
         return -1;
     }
     
@@ -205,7 +210,7 @@ public class LinkedListOfInteger {
      * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
      */
     public Integer removeByIndex(int index) {
-        // Implemente o algoritmo
+        
         return -1;
     }
 
@@ -217,7 +222,106 @@ public class LinkedListOfInteger {
      * lista nao contem o elemento
      */
     public int indexOf(Integer element) {
-        // Implemente o algoritmo
+        Node aux = head;
+
+        for(int i = 0; i < size(); i++) {
+            if(aux.element.equals(element)) {
+                return i;
+            }
+            aux = aux.next;
+        }
         return -1;
+    }
+
+    public int[] subList(int fromIndex, int toIndex) {
+        if(fromIndex < 0) {
+            throw new IndexOutOfBoundsException("Index invalido");
+        }
+        if(toIndex < fromIndex || toIndex > size()) {
+            throw new IndexOutOfBoundsException("Index invalido");
+        }
+    
+        int[] vetor = new int[toIndex - fromIndex];
+        Node aux = head;
+
+        for(int i = 1; i <= fromIndex; i++) {
+            aux = aux.next;
+        }
+
+        for(int i = 0; i < vetor.length; i++) {
+            vetor[i] = aux.element;
+            aux = aux.next;
+        }
+
+        return vetor;
+    }
+
+    public boolean equals(LinkedListOfInteger outra) {
+        if(size() != outra.size()) {
+            return false;
+        }
+        Node aux = head;
+        Node auxOutra = outra.head;
+
+        for(int i = 0; i < size(); i++) {
+            if(aux.element != auxOutra.element) {
+                return false;
+            }
+            aux = aux.next;
+            auxOutra = auxOutra.next;
+        }
+        return true;
+    }
+
+    public int[] getBackToFront() {
+        int[] v = new int[size()];
+        Node aux = head;
+        getBackToFront(aux, v, size() - 1);
+        return v;
+    }
+    private void getBackToFront(Node aux, int[] vet, int index) {
+        if(aux == null) {
+            return;
+        }
+        vet[index] = aux.element;
+        getBackToFront(aux.next, vet, index - 1);
+    }
+
+    public LinkedListOfInteger merge(LinkedListOfInteger l1, LinkedListOfInteger l2) {
+        Node aux1 = l1.head;
+        Node aux2 = l2.head;
+
+        int[] vet = new int[l1.size() + l2.size()];
+
+        for(int i = 0; i < l1.size(); i++) {
+            vet[i] = aux1.element;
+            aux1 = aux1.next;
+        }
+        for(int i = l1.size(); i < vet.length; i++) {
+            vet[i] = aux2.element;
+            aux2 = aux2.next;
+        }
+        insertionSort(vet);
+        LinkedListOfInteger lista = new LinkedListOfInteger();
+        for(int i = 0; i < vet.length; i++) {
+            lista.add(vet[i]);
+        }
+        return lista;
+    } 
+
+    public void insertionSort(int[] vetor) {
+        int j;
+        int key;
+        int i;
+    
+        for (j = 1; j < vetor.length; j++)
+        {
+          key = vetor[j];
+          for (i = j - 1; (i >= 0) && (vetor[i] > key); i--)
+          {
+             vetor[i + 1] = vetor[i];
+           }
+            vetor[i + 1] = key;
+        }
     }
 }

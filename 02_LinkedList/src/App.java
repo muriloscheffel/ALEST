@@ -1,12 +1,20 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        LinkedListOfInteger l = new LinkedListOfInteger();
-        l.add(2);
-        l.add(25);
-        l.add(3);
-        l.add(10);
+        LinkedListOfInteger lista = new LinkedListOfInteger();
+        LinkedListOfInteger l1 = new LinkedListOfInteger();
+        LinkedListOfInteger l2 = new LinkedListOfInteger();
 
-        
-        System.out.println(l);
+        l1.add(1);
+        l1.add(2);
+        l1.add(3);
+        l1.add(10);
+       
+        l2.add(1);
+        l2.add(2);
+        l2.add(3);
+        l2.add(10);
+
+        System.out.println(l1.equals(l2));
+      
     }
 }

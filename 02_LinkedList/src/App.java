@@ -14,7 +14,9 @@ public class App {
         l2.add(3);
         l2.add(10);
 
-        System.out.println(l1.equals(l2));
+        l1.add(2, 22);
+
+        System.out.println(l1);
       
     }
 }

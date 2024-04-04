@@ -162,7 +162,31 @@ public class LinkedListOfInteger {
         if(index < 0 || index > size()) {
             throw new IndexOutOfBoundsException("Index invalido");
         }
-        
+        Node n = new Node(element);
+        Node aux = head;
+        Node aux1 = head.next;
+
+        if(head == null) {
+            head = n;
+        }
+        if(index == 0) {
+            n.next = aux;
+            head = n;
+        }
+        if(index == count) {
+            tail.next = n;
+            tail = n;
+        }
+        if(index > 0 && index < count) {
+            for(int i = 0; i < index - 1; i++) {
+                aux = aux.next;
+                aux1 = aux1.next;
+            }
+            aux.next = n;
+            n.next = aux1;
+
+        }
+        count++;
     }
 
     /**
@@ -309,7 +333,7 @@ public class LinkedListOfInteger {
         return lista;
     } 
 
-    public void insertionSort(int[] vetor) {
+    private void insertionSort(int[] vetor) {
         int j;
         int key;
         int i;

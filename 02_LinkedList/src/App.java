@@ -7,16 +7,19 @@ public class App {
         l1.add(1);
         l1.add(2);
         l1.add(3);
-        l1.add(10);
+
        
         l2.add(1);
         l2.add(2);
         l2.add(3);
         l2.add(10);
 
-        l1.add(2, 22);
+        System.out.println(l2.removeByIndex(2));
 
-        System.out.println(l1);
+
+        
+
+        System.out.println(l2);
       
     }
 }

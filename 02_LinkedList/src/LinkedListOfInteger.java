@@ -145,11 +145,14 @@ public class LinkedListOfInteger {
             throw new IndexOutOfBoundsException("Index invalido");
         }
         Node aux = head;
+        Node auxReturn = head;
 
-        for(int i = 0; i < index; i++) {
-
+        for(int i = 0; i <= index; i++) {
+            aux = aux.next;
+            auxReturn = auxReturn.next;
         }
-        return -1;
+        aux.element = element;
+        return auxReturn.element;
     }
     
     /**
@@ -164,27 +167,21 @@ public class LinkedListOfInteger {
         }
         Node n = new Node(element);
         Node aux = head;
-        Node aux1 = head.next;
 
         if(head == null) {
             head = n;
-        }
-        if(index == 0) {
+        } else if(index == 0) {
             n.next = aux;
             head = n;
-        }
-        if(index == count) {
+        } else if(index == count) {
             tail.next = n;
             tail = n;
-        }
-        if(index > 0 && index < count) {
+        } else {
             for(int i = 0; i < index - 1; i++) {
                 aux = aux.next;
-                aux1 = aux1.next;
             }
+            n.next = aux.next;
             aux.next = n;
-            n.next = aux1;
-
         }
         count++;
     }
@@ -234,8 +231,32 @@ public class LinkedListOfInteger {
      * @throws IndexOutOfBoundsException se (index < 0 || index >= size())
      */
     public Integer removeByIndex(int index) {
-        
-        return -1;
+        if(index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index invalido");
+        }
+        if(count == 0) {
+            throw new IllegalArgumentException("Lista vazia");
+        }
+        Node aux = head;
+        Node aux2 = head;
+
+        if(index == 0) {
+            head = head.next;
+        } else if(index == count - 1) {
+            for(int i = 0; i < count - 2; i++) {
+                aux = aux.next;
+            }
+            tail = aux;
+            tail.next = null;
+        } else {
+            for(int i = 0; i < index - 1; i++) {
+                aux = aux.next;
+            }
+            aux2 = aux.next;
+            aux.next = aux2.next;
+        }
+        count--;
+        return aux2.element;
     }
 
     /**

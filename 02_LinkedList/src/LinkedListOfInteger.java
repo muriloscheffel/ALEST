@@ -366,6 +366,28 @@ public class LinkedListOfInteger {
         return lista;
     } 
 
+    public int contaOcorrencias(Integer element) {
+        Node aux = head;
+        int cont = 0;
+
+        for(int i = 0; i < size(); i++) {
+            if(aux.element.equals(element)) {
+                cont++;
+            }
+            aux = aux.next;
+        }
+
+        return cont;
+    }
+
+    public void reverse() {
+
+    }
+
+    // public LinkedListOfInteger getRepetidos(LinkedListOfInteger li) {
+    
+    // }
+
     private void insertionSort(int[] vetor) {
         int j;
         int key;

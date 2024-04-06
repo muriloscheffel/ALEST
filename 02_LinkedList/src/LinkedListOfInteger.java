@@ -145,14 +145,13 @@ public class LinkedListOfInteger {
             throw new IndexOutOfBoundsException("Index invalido");
         }
         Node aux = head;
-        Node auxReturn = head;
 
-        for(int i = 0; i <= index; i++) {
+        for(int i = 0; i < index; i++) {
             aux = aux.next;
-            auxReturn = auxReturn.next;
         }
+        Integer auxReturn = aux.element;
         aux.element = element;
-        return auxReturn.element;
+        return auxReturn;
     }
     
     /**

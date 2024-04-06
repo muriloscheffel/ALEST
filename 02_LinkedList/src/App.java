@@ -14,12 +14,13 @@ public class App {
         l2.add(3);
         l2.add(10);
 
-        System.out.println(l2.removeByIndex(2));
+        System.out.println(l1.set(1, 4));
 
 
+        System.out.println("-----------------");
         
 
-        System.out.println(l2);
+        System.out.println(l1);
       
     }
 }

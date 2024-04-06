@@ -317,18 +317,31 @@ public class LinkedListOfInteger {
         return true;
     }
 
-    public int[] getBackToFront() {
+    public int[] getBackToFrontRec() {
         int[] v = new int[size()];
         Node aux = head;
-        getBackToFront(aux, v, size() - 1);
+        getBackToFrontRec(aux, v, size() - 1);
         return v;
     }
-    private void getBackToFront(Node aux, int[] vet, int index) {
+    private void getBackToFrontRec(Node aux, int[] vet, int index) {
         if(aux == null) {
             return;
         }
         vet[index] = aux.element;
-        getBackToFront(aux.next, vet, index - 1);
+        getBackToFrontRec(aux.next, vet, index - 1);
+    }
+
+    public void getBackToFront() {
+        Node aux = head;
+        int[]vAux = new int[size()];
+
+        for(int i = size() - 1; i >= 0; i--) {
+            vAux[i] = aux.element;
+            aux = aux.next;
+        }
+        for(int i = 0; i < size(); i++) {
+            System.out.println(vAux[i]);
+        }
     }
 
     public LinkedListOfInteger merge(LinkedListOfInteger l1, LinkedListOfInteger l2) {

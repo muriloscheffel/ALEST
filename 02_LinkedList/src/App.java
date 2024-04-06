@@ -14,7 +14,7 @@ public class App {
         l2.add(3);
         l2.add(10);
 
-        System.out.println(l1.set(1, 4));
+        l1.getBackToFront();
 
 
         System.out.println("-----------------");
